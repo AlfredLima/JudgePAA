@@ -7,7 +7,7 @@ class Submission(models.Model):
     registration = models.CharField(max_length=8)
     password = models.CharField(max_length=8)
     date = models.DateTimeField(default=timezone.now)
-    file = models.FileField()
+    file = models.TextField()
 
     def __str__(self):
         return self.registration

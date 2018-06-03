@@ -14,13 +14,10 @@ def post_new(request):
 		if form.is_valid():
 			print("Post valido")
 			post = form.save(commit=False)
-			post.author = request.user
-			post.published_date = timezone.now()
 			post.save()
-			return redirect('post_detail', pk=post.pk)
-	else:
-		form = SubmissionForm()
+	form = SubmissionForm()
 	return render(request, 'submission/post_new.html', {'form': form})
+
 def save(request):
 	pass
 

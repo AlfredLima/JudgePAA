@@ -1,9 +1,18 @@
 <form method="post" enctype="multipart/form-data">
-{% block content %}
-    <h1>New post</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-{% endblock %}
+	<head>
+        <title>Judge PAA</title>
+    </head>
+    <body>
+	{% block content %}
+	    <h1>Prova</h1>
+	    <div>
+			<h4> A prova consiste em fazer um algoritmo que resolva o problema de Caxeiro Viajante.</h4>
+			<h4> Não esperemos a resposta exata e sim uma resposta aproximada. Ou seja, o caminho encontrado pode ser até duas vezes maior que a melhor resposta. Divirta-se.</h4>
+		</div>
+	    <form method="POST" class="post-form">{% csrf_token %}
+	        {{ form.as_p }}
+	        <button type="submit" class="save btn btn-default">Submeter</button>
+	    </form>
+	{% endblock %}
+	</body>
 </form>
