@@ -1,5 +1,31 @@
 from django.shortcuts import render
+from .forms import SubmissionForm
+from django.utils import timezone
+from django.shortcuts import redirect
 
-# Create your views here.
 def post_list(request):
     return render(request, 'submission/post_list.html', {})
+
+def post_new(request):
+	print("Inicio")
+	if request.method == "POST":
+		print("Post")
+		form = SubmissionForm(request.POST)
+		if form.is_valid():
+			print("Post valido")
+			post = form.save(commit=False)
+			post.author = request.user
+			post.published_date = timezone.now()
+			post.save()
+			return redirect('post_detail', pk=post.pk)
+	else:
+		form = SubmissionForm()
+	return render(request, 'submission/post_new.html', {'form': form})
+def save(request):
+	pass
+
+
+# registration = models.CharField(max_length=8)
+# password = models.CharField(max_length=8)
+# date = models.DateTimeField(default=timezone.now)
+# file = models.FileField()
