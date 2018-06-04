@@ -1,18 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Judge PAA - Submissão</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body style="margin: 30px;">
 <form method="post" enctype="multipart/form-data">
-	<head>
-        <title>Judge PAA</title>
-    </head>
-    <body>
-	{% block content %}
-	    <h1>Prova</h1>
-	    <div>
-			<h4> A prova consiste em fazer um algoritmo que resolva o problema de Caxeiro Viajante.</h4>
-			<h4> Não esperemos a resposta exata e sim uma resposta aproximada. Ou seja, o caminho encontrado pode ser até duas vezes maior que a melhor resposta. Divirta-se.</h4>
-		</div>
-	    <form method="POST" class="post-form">{% csrf_token %}
-	        {{ form.as_p }}
-	        <button type="submit" class="save btn btn-default">Submeter</button>
-	    </form>
-	{% endblock %}
-	</body>
+    {% block content %}
+        <h1 style="margin-bottom: 20px;">Prova</h1>
+        <div class="card">
+            <div class="card-header">
+                Descrição
+            </div>
+            <div class="card-body">
+                <p class="card-text">Resolva o problema de Caxeiro Viajante com um algoritmo aproximado. Este algoritmo
+                    deve ser uma 2-aproximação para o problema. Ou seja, o caminho encontrado pode ser
+                    até duas vezes maior que a melhor resposta.</p>
+                <p>Seu algoritmo deve resolver o problema em tempo polinomial e usando a linguagem de programação <b>Python
+                    3</b>.</p>
+                <p>Divirta-se.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;" class="card">
+            <div class="card-header">
+                Entrada
+            </div>
+            <div class="card-body">
+                <p class="card-text">A entrada consiste primeiramente de uma linha com um inteiro <b>V</b>, o qual
+                    indica o número de vértices no grafo. Nas <b>V</b> linhas seguintes, é dada uma matriz <b>V</b> x
+                    <b>V</b> que representa o grafo. Por exemplo:
+                </p>
+                <pre>
+4
+0 1 10 4
+1 0 2 20
+10 2 0 3
+4 20 3 0
+            </pre>
+                <p>Que é a matriz para o seguinte grafo:</p>
+                <div style="display: flex; flex-direction: column; align-items: center;"><img
+                        style="width: 400px; height: auto;" src="https://i.imgur.com/LsDtqUi.png"></div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;" class="card">
+            <div class="card-header">
+                Saída
+            </div>
+            <div class="card-body">
+                <p class="card-text">Consiste em <b>V + 1</b> inteiros separados por espaços, representando um caminho
+                    que respeite a 2-aproximação em uma única linha. Por exemplo:</p>
+                <pre>
+0 1 2 3 0
+                </pre>
+                <p>Que é um dos caminhos para o grafo acima que respeita a 2-aproximação.</p>
+            </div>
+        </div>
+        <div style="margin-top: 20px;" class="card">
+        <div class="card-header">
+                Submeter solução
+            </div>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-danger">Submeter</button>
+        </form>
+    {% endblock %}
+    </div>
 </form>
+</body>
+</html>
