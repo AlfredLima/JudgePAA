@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 
 from casetest import CaseTest
@@ -29,6 +29,7 @@ def post_new(request):
             file.write(post.file)
             p = Process(target=my_thread, args=(name, post,))
             p.start()
+            return HttpResponseRedirect('/submissions')
     form = SubmissionForm()
     return render(request, 'submission/post_new.html', {'form': form})
 
