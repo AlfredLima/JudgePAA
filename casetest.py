@@ -24,16 +24,17 @@ class CaseTest():
         path2 =  ['/inputs/','/outputs/']
         total = 0
         for case in self.cases:
-            call = "python3 " + code + " < " + path + path2[0] + str(case) + ".in"
+            call = "python " + code + " < " + path + path2[0] + str(case) + ".in"
             print(call)
             output = subprocess.check_output([call])
+            print(output)
             file = open( path + path2[0] + str(case) + ".out" )
             answer = int(file.readline())
             sumDist = 0
-            output = list( map(int,file.readline().split() ) )
+            output = list( map(int,output.split() ) )
             for i in range( len(output)-1 ):
                 sumDist += self.cases[case]['matrix'][ output[i] ][ output[i+1] ]
-            if sumDist >= self.cases[case]['answer'] && sumDist <= 2*self.cases[case]['answer']:
+            if self.cases[case]['answer'] <= sumDist <= 2*self.cases[case]['answer']:
                 total += 1
 
         return total
