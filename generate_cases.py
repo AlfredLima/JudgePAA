@@ -31,7 +31,7 @@ for i in range(qt_cases):
 
 	for j in range(size):
 		for k in range(size):
-			if not matrix[j][k]:
+			if not matrix[j][k] and ( j != k) :
 				d = random.randint(81,90)
 				matrix[ j ][ k ] = d
 				matrix[ k ][ j ] = d
