@@ -10,4 +10,4 @@ class Submission(models.Model):
     file = models.TextField()
 
     def __str__(self):
-        return self.registration
+        return str(self.pk)
