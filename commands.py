@@ -16,7 +16,7 @@ class Command(BaseCommand):
         proc_list = []
  
         for command in self.commands:
-            print "$ " + command
+            print("$ " + command)
             proc = Popen(command, shell=True, stdin=stdin, stdout=stdout, stderr=stderr)
             proc_list.append(proc)
  
