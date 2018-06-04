@@ -13,11 +13,8 @@ def post_new(request):
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.save()
-			date = (str(post.date)[11:19]).replace(':','_')
 			path = os.getcwd() + '/codes'
 			file = open( path + '/' + 'S' + str(post.pk) + '.py' , 'w' )
 			file.write(post.file)
-			
-			
 	form = SubmissionForm()
 	return render(request, 'submission/post_new.html', {'form': form})
