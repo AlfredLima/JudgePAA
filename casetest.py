@@ -40,7 +40,7 @@ class CaseTest():
             call = "python " + path + "/" + code
             print(call)
             try:
-                output = subprocess.check_output(call, input=payload, timeout=1)
+                output = subprocess.check_output(call, input=payload, timeout=8)
             except subprocess.TimeoutExpired:
                 print('Tempo excedido')
                 return {'status': 'timeup', 'grade': 0}
