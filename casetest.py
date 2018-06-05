@@ -34,9 +34,13 @@ class CaseTest():
         path2 = ['/inputs/', '/outputs/']
         total = 0
         for case in self.cases:
-            call = "python " + code + " < " + path + path2[0] + str(case) + ".in"
+            call = "python " + path + "/" + code + " < " + path + path2[0] + str(case) + ".in"
             print(call)
-            output = subprocess.check_output(['python', code, ' < ',path + path2[0] + str(case) + ".in"])
+            try:
+                output = subprocess.check_output(call, timeout=5)
+            except subprocess.TimeoutExpired:
+                print('Tempo excedido')
+                return {'status': 'timeup', 'grade': 0}
             print(output)
             file = open( path + path2[1] + str(case) + ".out" )
             answer = int(file.readline())
@@ -47,5 +51,5 @@ class CaseTest():
             if (self.cases[case]['answer'] <= sumDist <= 2*self.cases[case]['answer']) and self.validate(output) and (len(output) == self.cases[case]['size'] + 1) :
                 total += 1
 
-        return total * 1.0/len(self.cases)
+        return {'status': 'ok', 'grade': total * 1.0/len(self.cases)}
 
