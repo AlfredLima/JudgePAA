@@ -2,22 +2,27 @@ from django import forms
 
 from .models import Submission
 
-FIELD_NAME_MAPPING = {
-    'registration': 'Matrícula',
-    'file': 'Arquivo'
-}
 
 
 class SubmissionForm(forms.ModelForm):
 
     class Meta:
         model = Submission
-        fields = ('registration', 'file')
+        fields = ('name', 'email', 'registration', 'file')
         labels = {
             'registration': 'Matrícula',
-            'file': 'Arquivo'
+            'file': 'Arquivo',
+            'name': 'Nome',
+            'email': 'E-mail'
         }
         widgets = {
-           # 'name': forms.TextInput(
-           #     attrs={'class': 'form-control opunitName'}),
+            'registration': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            'name': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            'email': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            'file': forms.FileInput(
+                attrs={'class': 'form-control-file'}
+            )
         }
