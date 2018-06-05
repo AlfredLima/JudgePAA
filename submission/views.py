@@ -21,9 +21,6 @@ def post_new(request):
     if request.method == "POST":
         form = SubmissionForm(request.POST, request.FILES)
         if form.is_valid():
-            if Submission.objects.filter(registration=request.POST['registration']).count() >= 10:
-                sle = True
-            else:
                 post = form.save()
                 print(post.file.name)
                 p = Process(target=my_thread, args=(post.file.name, post,))
