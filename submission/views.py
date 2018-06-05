@@ -17,17 +17,21 @@ def post_list(request):
 
 
 def post_new(request):
+    sle = False
     if request.method == "POST":
         form = SubmissionForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save()
-            print(post.file.name)
-            p = Process(target=my_thread, args=(post.file.name, post,))
-            p.start()
-            return HttpResponseRedirect('/submissions/')
+            if Submission.objects.filter(registration=request.POST['registration']).count() >= 10:
+                sle = True
+            else:
+                post = form.save()
+                print(post.file.name)
+                p = Process(target=my_thread, args=(post.file.name, post,))
+                p.start()
+                return HttpResponseRedirect('/submissions/')
     else:
         form = SubmissionForm()
-    return render(request, 'submission/post_new.html', {'form': form})
+    return render(request, 'submission/post_new.html', {'form': form, 'submission_limit_exceeded': sle})
 
 
 def get_submissions(request):
@@ -49,12 +53,12 @@ def my_thread(threadID, post):
     try:
         result = t.run(threadID)
         if (result['status'] == 'ok'):
-            if 1.0 - result <= 1e-3:
+            if 1.0 - result['grade'] <= 1e-3:
                 submission.evaluation = "Aceita"
                 submission.grade = 100
             else:
                 submission.evaluation = "Resposta Errada"
-                submission.grade = result * 100
+                submission.grade = result['grade'] * 100
         else:
             submission.evaluation = "Tempo excedido"
             submission.grade = 0

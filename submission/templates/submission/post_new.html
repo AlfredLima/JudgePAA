@@ -17,6 +17,9 @@
     {% block content %}
         <h1 style="margin-bottom: 20px;">Prova</h1>
         <a class="btn btn-primary" style="margin-bottom: 20px;" href="/submissions/">Ver submissões</a>
+        {% if submission_limit_exceeded %}
+            <div  style="width: 100%;" class="alert alert-warning">Você excedeu o número máximo de submissões autorizadas.</div>
+        {% endif %}
         {% if form.errors %}
             {% for field in form %}
                 {% for error in field.errors %}
@@ -40,7 +43,7 @@
                     deve ser uma 2-aproximação para o problema. Ou seja, o caminho encontrado pode ser
                     até duas vezes maior que a melhor resposta.</p>
                 <p>Seu algoritmo deve resolver o problema em tempo polinomial e usar a linguagem de programação <b>Python
-                    3</b>.</p>
+                    3</b>. O tempo limite de execução é de 1 segundo.</p>
                 <p>Divirta-se.</p>
             </div>
         </div>
@@ -63,7 +66,7 @@
             </pre>
                 <p>Que é a matriz para o seguinte grafo:</p>
                 <div style="display: flex; flex-direction: column; align-items: center;"><img
-                        style="width: 400px; height: auto;" src="https://i.imgur.com/LsDtqUi.png"></div>
+                        style="width: 400px; height: auto;" src="https://i.imgur.com/Xyo9w4f.png"></div>
             </div>
         </div>
 

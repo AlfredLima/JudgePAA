@@ -34,10 +34,13 @@ class CaseTest():
         path2 = ['/inputs/', '/outputs/']
         total = 0
         for case in self.cases:
-            call = "python " + path + "/" + code + " < " + path + path2[0] + str(case) + ".in"
+            inputfile = path + path2[0] + str(case) + ".in"
+            with open(inputfile, 'rb') as f:
+                payload = f.read()
+            call = "python " + path + "/" + code
             print(call)
             try:
-                output = subprocess.check_output(call, timeout=5)
+                output = subprocess.check_output(call, input=payload, timeout=1)
             except subprocess.TimeoutExpired:
                 print('Tempo excedido')
                 return {'status': 'timeup', 'grade': 0}
